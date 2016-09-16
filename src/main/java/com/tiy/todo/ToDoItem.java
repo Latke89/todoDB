@@ -25,8 +25,9 @@ public class ToDoItem {
 	public ToDoItem() {
 	}
 
-	public ToDoItem(String text, boolean isDone) {
+	public ToDoItem(String text, boolean isDone, User user) {
 		this.text = text;
 		this.isDone = false;
+		this.user = user;
 	}
 }

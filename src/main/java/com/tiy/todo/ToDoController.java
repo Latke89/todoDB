@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Brett on 9/15/16.
@@ -24,6 +26,15 @@ public class ToDoController {
 		if (session.getAttribute("user") != null) {
 			model.addAttribute("user", session.getAttribute("user"));
 		}
+
+		List<ToDoItem> itemList = new ArrayList<ToDoItem>();
+
+		User savedUser = (User)session.getAttribute("user");
+		if (savedUser != null) {
+			itemList = todos.findByUser(savedUser);
+		}
+		model.addAttribute("todos", itemList);
+
 		return "home";
 	}
 
@@ -55,10 +66,19 @@ public class ToDoController {
 		return "redirect:/";
 	}
 
-	@RequestMapping(path = "submitTodo", method = RequestMethod.POST)
-	public String insertTodo(HttpSession session, String text, boolean isDone) throws Exception {
+	@RequestMapping(path = "/submitTodo", method = RequestMethod.POST)
+	public String insertTodo(HttpSession session, String todo) throws Exception {
 		User user = (User) session.getAttribute("user");
-		ToDoItem item = new ToDoItem(text, isDone);
+		ToDoItem item = new ToDoItem(todo, false, user);
+		todos.save(item);
+		return "redirect:/";
+	}
+
+	@RequestMapping(path = "/delete", method = RequestMethod.GET)
+	public String deleteTodo(Model model, Integer todoID) throws Exception {
+		if(todoID != null) {
+			todos.delete(todoID);
+		}
 		return "redirect:/";
 	}
 

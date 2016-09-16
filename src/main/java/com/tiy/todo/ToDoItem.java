@@ -25,10 +25,8 @@ public class ToDoItem {
 	public ToDoItem() {
 	}
 
-	public ToDoItem(int id, String text, boolean isDone, User user) {
-		this.id = id;
+	public ToDoItem(String text, boolean isDone) {
 		this.text = text;
-		this.isDone = isDone;
-		this.user = user;
+		this.isDone = false;
 	}
 }

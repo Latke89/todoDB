@@ -15,17 +15,20 @@ public class User {
 	int id;
 
 	@Column (nullable = false)
-	String fullName;
+	String password;
 
-	@Column (nullable = false)
-	String userName;
+	@Column (nullable = false, unique = true)
+	String name;
 
 	public User() {
 	}
 
-	public User(int id, String fullName, String userName) {
-		this.id = id;
-		this.fullName = fullName;
-		this.userName = userName;
+	public String getPassword() {
+		return password;
+	}
+
+	public User(String name, String password) {
+		this.password = password;
+		this.name = name;
 	}
 }

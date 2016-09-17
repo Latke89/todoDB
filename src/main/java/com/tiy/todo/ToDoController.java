@@ -82,6 +82,17 @@ public class ToDoController {
 		return "redirect:/";
 	}
 
+	@RequestMapping(path = "/modify", method = RequestMethod.GET)
+	public String modify(Model model, Integer todoID) {
+		if (todoID != null) {
+			ToDoItem item = todos.findOne(todoID);
+			item.isDone = !item.isDone;
+			todos.save(item);
+		}
+
+		return "redirect:/";
+	}
+
 
 
 }

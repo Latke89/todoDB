@@ -12,7 +12,7 @@
 </form>
 <form action="/newUser" method="post">
     <input type="text" placeholder="Username" name="userName"/>
-    <input type="password" placeholder="Password" name="password" />
+    <input type="password" placeholder="Password" name="password"/>
     <button class="button" type="submit">Create User</button>
 </form>
 {{/user}}
@@ -32,7 +32,7 @@
 
 <ol>
     {{#todos}}
-        <li>{{text}} <!--{{isDone}}--> <a href="delete?todoID={{id}}">Delete</a></li>
+        <li>{{text}} {{isDone}} <a href="delete?todoID={{id}}">Delete</a> &nbsp; <a href="/modify?todoID={{id}}">Modify</a></li>
     {{/todos}}
 </ol>
 

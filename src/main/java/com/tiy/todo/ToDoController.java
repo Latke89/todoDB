@@ -32,7 +32,7 @@ public class ToDoController {
 
 		User savedUser = (User)session.getAttribute("user");
 		if (savedUser != null) {
-			itemList = todos.findByUser(savedUser);
+			itemList = todos.findByUserOrderById(savedUser);
 		}
 		model.addAttribute("todos", itemList);
 

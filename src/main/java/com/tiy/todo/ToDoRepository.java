@@ -10,8 +10,7 @@ import java.util.List;
  */
 public interface ToDoRepository extends CrudRepository<ToDoItem, Integer> {
 
-//	@Query("SELECT todo FROM ToDoItem todo ORDER BY todo.id WHERE todo.id = ?")
 	List<ToDoItem> findByUser(User user);
-	List<ToDoItem> findByisDoneFalse(User user);
+	List<ToDoItem> findByUserOrderById(User user);
 
 }

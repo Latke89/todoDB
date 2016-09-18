@@ -99,16 +99,48 @@ public class ToDoController {
 		List<ToDoItem> itemList = new ArrayList<ToDoItem>();
 
 		User savedUser = (User)session.getAttribute("user");
-			if (todoID != null) {
-				itemList = todos.findByisDoneFalse(savedUser);
-				for (ToDoItem item : itemList) {
-					item.isDone = true;
-					todos.save(item);
-				}
-			}
+		if (savedUser != null) {
+			itemList = todos.findByUser(savedUser);
 
+			for (ToDoItem item : itemList) {
+				todos.findOne(item.id);
+				item.isDone = true;
+				todos.save(item);
+			}
+		}
 
 		return "redirect:/";
+	}
+
+	@RequestMapping(path = "noneDone", method = RequestMethod.GET)
+	public String noneDone(HttpSession session) {
+		List<ToDoItem> itemList = new ArrayList<ToDoItem>();
+		User savedUser = (User)session.getAttribute("user");
+		if (savedUser != null) {
+			itemList = todos.findByUser(savedUser);
+			for(ToDoItem item : itemList) {
+				todos.findOne(item.id);
+				item.isDone = false;
+				todos.save(item);
+			}
+		}
+		return "redirect:/";
+	}
+
+	@RequestMapping(path = "toggleAll", method = RequestMethod.GET)
+	public String toggleAll(HttpSession session) {
+		List<ToDoItem> itemList = new ArrayList<ToDoItem>();
+		User savedUser = (User)session.getAttribute("user");
+		if (savedUser != null) {
+			itemList = todos.findByUser(savedUser);
+			for(ToDoItem item : itemList) {
+				todos.findOne(item.id);
+				item.isDone = !item.isDone;
+				todos.save(item);
+			}
+		}
+		return "redirect:/";
+
 	}
 
 

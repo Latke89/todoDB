@@ -7,7 +7,7 @@ li {border-style:solid;
 
 .button {
     background-color: #e7e7e7;
-    border: none;
+    border: solid 1px;
     color: black;
     text-align: center;
     text-decoration: none;

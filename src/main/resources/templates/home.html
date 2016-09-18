@@ -19,8 +19,20 @@
 
 {{#user}}
 <p>Welcome, {{name}}!</p>
-<form action="/logout" method="post">
+<form action="/logout" style="float:left" method="post">
     <button class="button" type="submit">Logout</button>
+</form>
+
+<form action="allDone" style="float:left" method="get">
+    <button class="button" type="allDone">Mark all as Complete</button>
+</form>
+
+<form action="noneDone" style="float:left" method="get">
+    <button class="button" type="noneDone">Mark all as Incomplete</button>
+</form>
+
+<form action="toggleAll" method="get">
+    <button class="button" type="toggleAll">Toggle all</button>
 </form>
 <br><br>
 
@@ -32,7 +44,7 @@
 
 <ol>
     {{#todos}}
-        <li>{{text}} {{isDone}} <a href="delete?todoID={{id}}">Delete</a> &nbsp; <a href="/modify?todoID={{id}}">Modify</a></li>
+        <li>{{text}} {{isDone}}  <a href="delete?todoID={{id}}">Delete</a> &nbsp; <a href="/toggle?todoID={{id}}">Toggle</a><input type="checkbox" value="none" name="check"/></li>
     {{/todos}}
 </ol>
 

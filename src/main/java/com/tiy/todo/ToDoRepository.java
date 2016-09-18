@@ -10,5 +10,6 @@ import java.util.List;
 public interface ToDoRepository extends CrudRepository<ToDoItem, Integer> {
 
 	List<ToDoItem> findByUser(User user);
+	List<ToDoItem> findByisDoneFalse(User user);
 
 }

@@ -15,6 +15,7 @@ import java.util.List;
  */
 @Controller
 public class ToDoController {
+
 	@Autowired
 	ToDoRepository todos;
 
@@ -82,8 +83,8 @@ public class ToDoController {
 		return "redirect:/";
 	}
 
-	@RequestMapping(path = "/modify", method = RequestMethod.GET)
-	public String modify(Model model, Integer todoID) {
+	@RequestMapping(path = "/toggle", method = RequestMethod.GET)
+	public String toggle(Integer todoID) {
 		if (todoID != null) {
 			ToDoItem item = todos.findOne(todoID);
 			item.isDone = !item.isDone;
@@ -93,6 +94,22 @@ public class ToDoController {
 		return "redirect:/";
 	}
 
+	@RequestMapping(path = "/allDone", method = RequestMethod.GET)
+	public String allDone(Model model, Integer todoID, HttpSession session) {
+		List<ToDoItem> itemList = new ArrayList<ToDoItem>();
+
+		User savedUser = (User)session.getAttribute("user");
+			if (todoID != null) {
+				itemList = todos.findByisDoneFalse(savedUser);
+				for (ToDoItem item : itemList) {
+					item.isDone = true;
+					todos.save(item);
+				}
+			}
+
+
+		return "redirect:/";
+	}
 
 
 }

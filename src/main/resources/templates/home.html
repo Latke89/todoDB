@@ -44,7 +44,7 @@
 
 <ol>
     {{#todos}}
-        <li>{{text}} {{isDone}}  <a href="delete?todoID={{id}}">Delete</a> &nbsp; <a href="/toggle?todoID={{id}}">Toggle</a><input type="checkbox" value="none" name="check"/></li>
+        <li>{{text}} <div class="div1">{{isDone}}</div>  <a href="delete?todoID={{id}}">Delete</a> &nbsp; <a href="/toggle?todoID={{id}}">Toggle</a><input type="checkbox" value="none" name="check"/></li>
     {{/todos}}
 </ol>
 

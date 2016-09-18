@@ -95,7 +95,7 @@ public class ToDoController {
 	}
 
 	@RequestMapping(path = "/allDone", method = RequestMethod.GET)
-	public String allDone(Model model, Integer todoID, HttpSession session) {
+	public String allDone (HttpSession session) {
 		List<ToDoItem> itemList = new ArrayList<ToDoItem>();
 
 		User savedUser = (User)session.getAttribute("user");

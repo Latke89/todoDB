@@ -1,10 +1,22 @@
-<html>
+<html lang="en-US" ng-app="TIYAngularApp">
 <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="js/ng-todo.js"></script>
+    <script src="../static/js/ng-todo.js"></script>
+
     <link href="https://fonts.googleapis.com/css?family=Exo|Raleway" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="styleSheet.css">
 </head>
-<body style="background-color: orange">
-{{^user}}
+<body ng-controller="SampleController" style="background-color:orange">
+
+
+<!--
+{{! changing the mustache delimiter so it doesn't conflict with  }}
+{{! the default angularjs delimeters - https://mustache.github.io/mustache.5.html for more info  }}
+{{=<% %>=}}
+-->
+
+<%^user%>
 <form action="/login" method="post">
     <input type="text" placeholder="Username" name="userName" required/>
     <input type="password" placeholder="Password" name="password" required/>
@@ -15,10 +27,10 @@
     <input type="password" placeholder="Password" name="password"/>
     <button class="button" type="submit">Create User</button>
 </form>
-{{/user}}
+<%/user%>
 
-{{#user}}
-<p>Welcome, {{name}}!</p>
+<%#user%>
+<p>Welcome, {{name}}!<span ng-bind="name"></span></p>
 <form action="/logout" style="float:left" method="post">
     <button class="button" type="submit">Logout</button>
 </form>
@@ -43,11 +55,11 @@
 
 
 <ol>
-    {{#todos}}
-        <li>{{text}} <div class="div1">{{isDone}}</div>  <a href="delete?todoID={{id}}">Delete</a> &nbsp; <a href="/toggle?todoID={{id}}">Toggle</a><input type="checkbox" value="none" name="check"/></li>
-    {{/todos}}
+    <%#todos%>
+        <li><%text%> <div class="div1">{{isDone}}</div>  <a href="delete?todoID={{id}}">Delete</a> &nbsp; <a href="/toggle?todoID={{id}}">Toggle</a><input type="checkbox" value="none" name="check"/></li>
+    <%/todos%>
 </ol>
 
-{{/user}}
+<%/user%>
 </body>
 </html>

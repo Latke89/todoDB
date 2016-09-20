@@ -143,9 +143,9 @@ public class ToDoController {
 
 	}
 
-	@RequestMapping(path = "todos", method = RequestMethod.GET)
+	@RequestMapping(path = "/todos", method = RequestMethod.GET)
 	public String todos(HttpSession session, Model model) {
-		return "todos";
+		return "/todos";
 	}
 
 

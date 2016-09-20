@@ -5,6 +5,13 @@
     <script src="js/ng-todo.js"></script>
     <Script src="../static/js/ng-todo.js"></Script>
 
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+
+    </style>
+
     <title>Title</title>
 </head>
 <body ng-controller="SampleController">
@@ -33,14 +40,23 @@
     <span> <input type="button" ng-click="addTodo()" value="Create new todo"/></span>
 </div>
 
-<div>
-    <ol>
-        <li ng-repeat="todo in todos">
-            {{todo.done}}, {{todo.text}}, {{todo.user.name}}
-        </li>
-    </ol>
-</div>
 
+<table>
+    <tr>
+        <th>Text</th>
+        <th>Is Done</th>
+        <th>Users</th>
+    </tr>
+    <tr ng-repeat="todo in todos">
+        <td>{{todo.text}}
+            <button style="float:right" ng-click="deleteTodo(todo.id)">Delete</button>
+        </td>
+        <td>{{todo.done}}
+            <button ng-click="toggleTodo(todo.id)">T</button>
+        </td>
+        <td>{{todo.user.name}}</td>
+    </tr>
+</table>
 
 
 

@@ -19,7 +19,7 @@ angular.module('TIYAngularApp', [])
            };
 
            $scope.addTodo = function() {
-               console.log("About to add the following todo " + JSON.stringify($scope.newGame));
+               console.log("About to add the following todo " + JSON.stringify($scope.newTodo));
 
                $http.post("/addTodo.json", $scope.newTodo)
                    .then(
@@ -33,7 +33,41 @@ angular.module('TIYAngularApp', [])
                        });
            };
 
+              $scope.deleteTodo = function(todoID) {
+              console.log("About to delete the following todo" + JSON.stringify(todoID));
+
+              $http.get("http://localhost:8080/delete.json?todoID=" + todoID)
+               .then(
+                   function successCallback(response) {
+                       alert("Successful delete =D")
+                       console.log(response.data);
+                       console.log("deleting data");
+                       $scope.todos = response.data;
+                   },
+                   function errorCallback (response) {
+                       console.log("Unable to delete");
+                   });
+              };
+
+              $scope.toggleTodo = function(todoID) {
+                console.log("About to toggle todo with ID " + JSON.stringify(todoID));
+
+                $http.get("http://localhost:8080/toggle.json?todoID=" + todoID)
+                .then(
+                    function successCallback(response) {
+                        alert("Successful toggle!");
+                        console.log(response.data);
+                        console.log("toggling data...");
+                        $scope.todos = response.data;
+                        },
+                    function errorCallback(response) {
+                        (console.log("unable to toggle"));
+                    });
+                };
+
 
 
         $scope.newTodo = {};
+
+
     });

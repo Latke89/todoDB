@@ -12,5 +12,6 @@ public interface ToDoRepository extends CrudRepository<ToDoItem, Integer> {
 
 	List<ToDoItem> findByUser(User user);
 	List<ToDoItem> findByUserOrderById(User user);
+	List<ToDoItem> findAllByOrderById();
 
 }

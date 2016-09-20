@@ -23,7 +23,7 @@ public class ToDoRestController {
 	@RequestMapping(path = "/todos.json", method = RequestMethod.GET)
 	public ArrayList<ToDoItem> getTodos() {
 		ArrayList<ToDoItem>todoList = new ArrayList<>();
-		Iterable<ToDoItem>allItems = todos.findAll();
+		Iterable<ToDoItem>allItems = todos.findAllByOrderById();
 		for (ToDoItem item : allItems) {
 			todoList.add(item);
 		}
@@ -39,6 +39,25 @@ public class ToDoRestController {
 		}
 		item.user = user;
 		todos.save(item);
+		return getTodos();
+	}
+
+	@RequestMapping(path = "/delete.json", method = RequestMethod.GET)
+	public List<ToDoItem> deleteTodo(int todoID) throws Exception {
+		ToDoItem item = todos.findOne(todoID);
+
+		todos.delete(item.id);
+		return getTodos();
+	}
+
+	@RequestMapping(path = "/toggle.json", method = RequestMethod.GET)
+	public List<ToDoItem> toggleTodo(int todoID) {
+		System.out.println("Toggling todo with ID " + todoID);
+
+		ToDoItem item = todos.findOne(todoID);
+		item.isDone = !item.isDone;
+		todos.save(item);
+
 		return getTodos();
 	}
 
